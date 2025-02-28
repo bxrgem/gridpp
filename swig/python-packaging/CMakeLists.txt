@@ -1,6 +1,5 @@
-find_package(PythonLibs REQUIRED)
-find_package(PythonInterp REQUIRED)
-include_directories(${PYTHON_INCLUDE_PATH})
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development NumPy)
+include_directories(${Python3_INCLUDE_DIRS})
 
 # Files to install with Python
 file(GLOB CPP_INCLUDE_FILES ${CMAKE_SOURCE_DIR}/include/*.h)
@@ -28,9 +27,7 @@ add_custom_target(package-python
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/README.md ${CMAKE_CURRENT_BINARY_DIR}
     COMMAND ${CMAKE_COMMAND} -E copy ${SOURCES} ${CMAKE_CURRENT_BINARY_DIR}/src/api
     COMMAND ${CMAKE_COMMAND} -E copy ${CPP_INCLUDE_FILES} ${CMAKE_CURRENT_BINARY_DIR}/include
-    # COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/include/dependencies ${CMAKE_CURRENT_BINARY_DIR}/include
     COMMAND ${SWIG_EXECUTABLE} -python ${CMAKE_SWIG_FLAGS} -outdir ${CMAKE_CURRENT_BINARY_DIR} -c++ -I./include -o ${CMAKE_CURRENT_BINARY_DIR}/gridppPYTHON_wrap.cxx ${SWIG_INTERFACE}
-    # COMMAND ${PYTHON_EXECUTABLE} ${SETUP_PY_OUT} sdist --dist-dir ${CMAKE_BINARY_DIR}
     COMMAND python3 ${SETUP_PY_OUT} sdist --dist-dir ${CMAKE_BINARY_DIR}
     )
 # add_dependencies(package-python _gridpp2)

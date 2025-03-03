@@ -21,7 +21,7 @@ set_property(TARGET rgridpp PROPERTY OUTPUT_NAME gridpp)
 
 # Declare install target for python
 #install(TARGETS swig_example
-#        COMMAND "${PYTHON_EXECUTABLE} setup.py"
+#        COMMAND "${Python3_EXECUTABLE} setup.py"
 #        COMPONENT swig-python)
 
 # Install target to call setup.py

@@ -42,23 +42,23 @@ configure_file(${SETUP_PY_IN} ${SETUP_PY_OUT})
 # Install target to call setup.py
 add_custom_target(install-python
         DEPENDS gridpp_swig
-        COMMAND ${PYTHON_EXECUTABLE} ${SETUP_PY_OUT} install)
+        COMMAND ${Python3_EXECUTABLE} ${SETUP_PY_OUT} install)
 
 add_custom_target(install-python-user
         DEPENDS gridpp_swig
-        COMMAND ${PYTHON_EXECUTABLE} ${SETUP_PY_OUT} install --user)
+        COMMAND ${Python3_EXECUTABLE} ${SETUP_PY_OUT} install --user)
 
 add_custom_target(build-python
         DEPENDS gridpp_swig
-        COMMAND ${PYTHON_EXECUTABLE} ${SETUP_PY_OUT} build)
+        COMMAND ${Python3_EXECUTABLE} ${SETUP_PY_OUT} build)
 
 add_custom_target(develop-python
         DEPENDS gridpp_swig
-        COMMAND ${PYTHON_EXECUTABLE} ${SETUP_PY_OUT} develop)
+        COMMAND ${Python3_EXECUTABLE} ${SETUP_PY_OUT} develop)
 
 add_custom_target(develop-python-user
         DEPENDS gridpp_swig
-        COMMAND ${PYTHON_EXECUTABLE} ${SETUP_PY_OUT} develop --user)
+        COMMAND ${Python3_EXECUTABLE} ${SETUP_PY_OUT} develop --user)
 
 if (ENABLE_TESTS)
     # Copy the test programs to be next to the gridpp.py package
@@ -67,6 +67,6 @@ if (ENABLE_TESTS)
         ${CMAKE_SOURCE_DIR}/tests
         ${CMAKE_CURRENT_BINARY_DIR}/tests)
 
-    add_custom_target(tests COMMAND ${PYTHON_EXECUTABLE} -m coverage run -m unittest discover)
+    add_custom_target(tests COMMAND ${Python3_EXECUTABLE} -m coverage run -m unittest discover)
     add_dependencies(tests tests-data build-python)
 endif()

@@ -20,6 +20,11 @@ else()
     # CentOS5, c++11 is more readily available, so this is preferred.
     find_package(Boost REQUIRED)
     find_package(Armadillo 6.5 REQUIRED)
+    # find_package(Armadillo REQUIRED)
+    # if(Armadillo_VERSION VERSION_GREATER_EQUAL "6.5")
+    #     message(FATAL_ERROR "Armadillo version 6.5 or later is required")
+    # endif()
+
     if(${Boost_MINOR_VERSION} GREATER 74)
         set(CMAKE_CXX_STANDARD 14)
     else()
